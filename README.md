@@ -67,3 +67,59 @@ This repository provides the architecture and design of a **Stock Analysis Tool*
 6. **Notifications**: Alerts are sent to users via **email**, **SMS**, or **push notifications** based on user preferences.
 
 ---
+
+## Architecture Diagram
+
+```mermaid
+graph TD
+  subgraph "User"
+    A["User Device (Web/Mobile App)"]
+  end
+
+  subgraph "Gateway"
+    B["API Gateway (REST/GraphQL)"]
+  end
+
+  subgraph "Backend"
+    C["Backend Service Layer (Gin - Golang)"]
+    C1["Stock Data Fetcher"]
+    C2["Technical Analysis Module"]
+    C3["ML/AI Models & Insights"]
+  end
+
+  subgraph "Processing"
+    D["Data Processing Layer (Kafka / Go-Cron)"]
+  end
+
+  subgraph "Storage"
+    E1["Time-Series DB (InfluxDB)"]
+    E2["Relational DB (PostgreSQL)"]
+    E3["Cache Layer (Redis)"]
+  end
+
+  subgraph "Notifications"
+    F["Notification & Alert System (Email / SMS / Push)"]
+  end
+
+  subgraph "Auth"
+    G["Authentication & Authorization (OAuth / JWT)"]
+  end
+
+  A --> B
+  B --> C
+
+  C --> C1
+  C --> C2
+  C --> C3
+
+  C1 --> D
+  C2 --> D
+  C3 --> D
+
+  D --> E1
+  D --> E2
+  D --> E3
+
+  C --> F
+  A --> G
+  B --> G
