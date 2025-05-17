@@ -7,6 +7,7 @@ import (
 )
 
 // SSO Login
+const ssoSignupUrl = "/signup"
 const ssoLoginUrl = "/login"
 
 func SetupRouter() *gin.Engine {
@@ -16,7 +17,7 @@ func SetupRouter() *gin.Engine {
 	baseMiddleware := []gin.HandlerFunc{}
 	baseRouter.Use(baseMiddleware...)
 
-	baseRouter.POST(ssoLoginUrl, handlers.UserSignup)
+	baseRouter.POST(ssoSignupUrl, handlers.UserSignup)
 
 	// Apply middleware to router
 	backendMiddleware := []gin.HandlerFunc{

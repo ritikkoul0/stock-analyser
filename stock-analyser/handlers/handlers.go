@@ -25,7 +25,7 @@ func UserSignup(ctx *gin.Context) {
 	}
 
 	// Save user to database (replace this with real logic)
-	err = database.SaveUser(input.Username, input.Email, string(hashedPassword))
+	err = database.SaveUser(ctx, input.Username, input.Email, string(hashedPassword))
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save user"})
 		return
