@@ -68,6 +68,17 @@ This repository provides the architecture and design of a **Stock Analysis Tool*
 
 ---
 
+
+---
+POSTGRES:
+https://neon.tech/
+stockanalyser@yopmail.com
+Controlstock@123
+
+
+MAILBOX:
+https://yopmail.com/en/wm
+
 ## Architecture Diagram
 
 ```mermaid
@@ -123,3 +134,4 @@ graph TD
   C --> F
   A --> G
   B --> G
+
