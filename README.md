@@ -76,6 +76,12 @@ stockanalyser@yopmail.com
 Controlstock@123
 
 
+---
+REDIS:
+https://console.upstash.com/
+stockanalyser@yopmail.com
+Controlstock@123
+
 MAILBOX:
 https://yopmail.com/en/wm
 
