@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"stock-analyzer/stock-analyser/utils"
+	"stock-analyser/utils"
 
 	_ "github.com/lib/pq"
 )

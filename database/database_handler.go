@@ -6,7 +6,6 @@ import (
 	"log"
 )
 
-
 func SaveUser(ctx context.Context, username, email, hashedPassword string) error {
 	// Attempt to insert the user
 	query := `
@@ -24,4 +23,15 @@ func SaveUser(ctx context.Context, username, email, hashedPassword string) error
 
 	log.Printf("✅ User inserted with ID: %d\n", userID)
 	return nil
+}
+
+func UserExists(ctx context.Context, username string, email string) (bool, error) {
+	var exists bool
+	query := `
+		SELECT EXISTS (
+			SELECT 1 FROM users WHERE username = $1 OR email = $2
+		);
+	`
+	err := DB.QueryRow(query, username, email).Scan(&exists)
+	return exists, err
 }
