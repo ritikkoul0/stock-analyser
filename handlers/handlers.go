@@ -3,19 +3,36 @@ package handlers
 import (
 	"net/http"
 	"stock-analyser/database"
+	"stock-analyser/inputstructures"
+	"stock-analyser/precheck"
+	"stock-analyser/rediscache"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
 
 func UserSignup(ctx *gin.Context) {
-	var input SignupInput
+	var input inputstructures.SignupInput
 
 	// Bind JSON input
 	if err := ctx.ShouldBindJSON(&input); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
+	precheckpassed, msg, err := precheck.Signup(input)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Redis error: " + err.Error()})
+		return
+	}
+
+	if !precheckpassed {
+		ctx.JSON(http.StatusCreated, gin.H{"message": msg})
+		return
+	}
+
+	//pepperisation
+	input.Password = "stock" + input.Password + "analyser"
 
 	// Hash the password
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.DefaultCost)
@@ -24,6 +41,8 @@ func UserSignup(ctx *gin.Context) {
 		return
 	}
 
+	// add username and email to redis
+	rediscache.AddDataToCache(input.Username, input.Email)
 	// Save user to database (replace this with real logic)
 	err = database.SaveUser(ctx, input.Username, input.Email, string(hashedPassword))
 	if err != nil {

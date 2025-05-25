@@ -9,6 +9,7 @@ import (
 	"os/signal"
 	"stock-analyser/database"
 	"stock-analyser/logger"
+	"stock-analyser/rediscache"
 	"stock-analyser/routers"
 	"stock-analyser/utils"
 
@@ -32,6 +33,8 @@ func main() {
 	appContext, stopSignals := signal.NotifyContext(context.Background(), shutdownSignals...)
 	defer stopSignals()
 
+	// Initialise redis
+	rediscache.Redis()
 	// Initialize database connection
 	logger.Info("Initializing database connection...")
 	err := database.InitializeConnection(appContext, utils.Config)
