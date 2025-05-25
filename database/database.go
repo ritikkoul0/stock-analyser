@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"stock-analyser/models"
 	"stock-analyser/utils"
 
 	_ "github.com/lib/pq"
@@ -28,4 +29,16 @@ func InitializeConnection(ctx context.Context, config *utils.AppConfig) error {
 
 	DB = db
 	return nil
+}
+
+func GetUserByEmail(ctx context.Context, email string) (*models.User, error) {
+	query := `SELECT id, username, email, password FROM users WHERE email = $1`
+
+	var user models.User
+	err := DB.QueryRowContext(ctx, query, email).Scan(&user.ID, &user.Username, &user.Email, &user.Password)
+	if err != nil {
+		return nil, fmt.Errorf("user not found: %w", err)
+	}
+
+	return &user, nil
 }

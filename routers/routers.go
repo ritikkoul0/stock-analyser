@@ -18,6 +18,7 @@ func SetupRouter() *gin.Engine {
 	baseRouter.Use(baseMiddleware...)
 
 	baseRouter.POST(ssoSignupUrl, handlers.UserSignup)
+	baseRouter.POST(ssoLoginUrl, handlers.UserLogin)
 
 	// Apply middleware to router
 	backendMiddleware := []gin.HandlerFunc{
