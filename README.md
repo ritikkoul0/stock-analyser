@@ -98,6 +98,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 ## Architecture Diagram
 
-<img width="858" alt="image" src="https://github.com/user-attachments/assets/0bd8b4c4-6ade-407f-acae-877b85ab2d0a" />
+<img width="858" alt="image" src="https://github.com/user-attachments/assets/8b3a45d0-611d-44c1-8ed1-5ae139c4089a" />
+
 
 
