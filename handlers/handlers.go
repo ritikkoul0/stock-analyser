@@ -52,3 +52,44 @@ func UserSignup(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusCreated, gin.H{"message": "User created successfully"})
 }
+
+
+
+func UserLogin(ctx *gin.Context) {
+	var input inputstructures.LoginInput
+
+	if err := ctx.ShouldBindJSON(&input); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	ok, msg, err := precheck.Login(input)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
+		return
+	}
+	if !ok {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"error": msg})
+		return
+	}
+
+	// Retrieve from DB for password
+	user, err := database.GetUserByEmail(ctx, input.Email)
+	if err != nil {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password"})
+		return
+	}
+
+	// Add pepper before comparing
+	pepperedPassword := "stock" + input.Password + "analyser"
+
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(pepperedPassword))
+	if err != nil {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password"})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "Login successful",
+	})
+}
