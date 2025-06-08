@@ -11,6 +11,7 @@ type AppConfig struct {
 	DBPassword      string
 	DBName          string
 	DBSSLMode       string
+	KafkaHost       string
 }
 
 var Config *AppConfig
@@ -27,5 +28,6 @@ func UpdateVariables() {
 		DBPassword:      "npg_IzdP9VJ3QMXi",
 		DBName:          "neondb",
 		DBSSLMode:       "require",
+		KafkaHost:       "",
 	}
 }

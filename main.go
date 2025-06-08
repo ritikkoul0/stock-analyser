@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/signal"
 	"stock-analyser/database"
+	"stock-analyser/kafka"
 	"stock-analyser/logger"
 	"stock-analyser/rediscache"
 	"stock-analyser/routers"
@@ -33,6 +34,7 @@ func main() {
 	appContext, stopSignals := signal.NotifyContext(context.Background(), shutdownSignals...)
 	defer stopSignals()
 
+	kafka.Initialise()
 	// Initialise redis
 	rediscache.Redis()
 	// Initialize database connection
