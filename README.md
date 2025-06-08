@@ -85,6 +85,10 @@ Controlstock@123
 MAILBOX:
 https://yopmail.com/en/wm
 
+KAFKA:
+https://cloud.redpanda.com/clusters
+stockanalyser@yopmail.com
+Controlstock@123
 
 
 TABLE COMMAND COMMANDS:
