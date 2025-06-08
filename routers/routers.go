@@ -17,6 +17,7 @@ func SetupRouter() *gin.Engine {
 	baseMiddleware := []gin.HandlerFunc{}
 	baseRouter.Use(baseMiddleware...)
 	baseRouter.POST(ssoSignupUrl, handlers.UserSignup)
+	baseRouter.POST(ssoLoginUrl, handlers.UserLogin)
 
 	//public ipo api's
 	v1 := baseRouter.Group("/api/v1")
