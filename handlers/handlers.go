@@ -53,6 +53,8 @@ func UserSignup(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, gin.H{"message": "User created successfully"})
 }
 
+
+
 func UserLogin(ctx *gin.Context) {
 	var input inputstructures.LoginInput
 

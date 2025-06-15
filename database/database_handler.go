@@ -35,3 +35,28 @@ func UserExists(ctx context.Context, username string, email string) (bool, error
 	err := DB.QueryRow(query, username, email).Scan(&exists)
 	return exists, err
 }
+
+func GetStock(ctx context.Context) ([]string, error) {
+	query := `SELECT stock_symbol FROM stocksymbol;`
+
+	rows, err := DB.QueryContext(ctx, query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var stocks []string
+	for rows.Next() {
+		var stock string
+		if err := rows.Scan(&stock); err != nil {
+			return nil, err
+		}
+		stocks = append(stocks, stock)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return stocks, nil
+}

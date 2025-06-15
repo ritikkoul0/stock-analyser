@@ -85,6 +85,10 @@ Controlstock@123
 MAILBOX:
 https://yopmail.com/en/wm
 
+KAFKA:
+https://cloud.redpanda.com/clusters
+stockanalyser@yopmail.com
+Controlstock@123
 
 
 TABLE COMMAND COMMANDS:
@@ -99,6 +103,3 @@ CREATE TABLE IF NOT EXISTS users (
 ## Architecture Diagram
 
 <img width="858" alt="image" src="https://github.com/user-attachments/assets/8b3a45d0-611d-44c1-8ed1-5ae139c4089a" />
-
-
-
