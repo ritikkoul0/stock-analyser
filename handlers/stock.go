@@ -1,10 +1,10 @@
 package handlers
 
 import (
-	"encoding/json"
 	"log"
 	"stock-analyser/database"
 	"stock-analyser/kafka"
+	overview "stock-analyser/rpcclient"
 
 	"github.com/gin-gonic/gin"
 )
@@ -27,19 +27,15 @@ func GetStockDetail(ctx *gin.Context) {
 		return
 	}
 
-	stockJson, err := json.Marshal(stockarray)
-	if err != nil {
-		ctx.JSON(500, gin.H{"error": "Failed to serialize stock data"})
-		return
+	for _, stock := range stockarray {
+		err := kafka.SendMessage(ctx, "stock-analyser", stock)
+		if err != nil {
+			log.Printf("Kafka write failed for %v: %v", stock, err)
+			ctx.JSON(500, gin.H{"error": "Kafka write failed"})
+			return
+		}
 	}
-
-	err = kafka.SendMessage(ctx, "stock-analyser", stockJson)
-	if err != nil {
-		log.Printf("Kafka write failed: %v", err)
-		ctx.JSON(500, gin.H{"error": "Kafka write failed"})
-		return
-	}
-
+	go overview.Overview()
 	ctx.JSON(200, gin.H{"message": "Stock data sent to Kafka"})
 }
 
