@@ -5,11 +5,12 @@ go 1.24.2
 require (
 	github.com/gin-gonic/gin v1.10.1
 	github.com/lib/pq v1.10.9
-	github.com/redis/go-redis/v9 v9.8.0
+	github.com/redis/go-redis/v9 v9.10.0
 	github.com/segmentio/kafka-go v0.4.48
 	go.uber.org/zap v1.27.0
-	golang.org/x/crypto v0.38.0
-	golang.org/x/sync v0.14.0
+	golang.org/x/crypto v0.39.0
+	golang.org/x/sync v0.15.0
+	google.golang.org/grpc v1.73.0
 )
 
 require (
@@ -34,6 +35,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/pierrec/lz4/v4 v4.1.15 // indirect
+	github.com/ritikkoul0/stock-rpc v0.0.0-20250615075806-df7e3821c181 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
@@ -41,9 +43,10 @@ require (
 	github.com/xdg-go/stringprep v1.0.4 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/arch v0.8.0 // indirect
-	golang.org/x/net v0.25.0 // indirect
+	golang.org/x/net v0.38.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
-	golang.org/x/text v0.25.0 // indirect
-	google.golang.org/protobuf v1.34.1 // indirect
+	golang.org/x/text v0.26.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250324211829-b45e905df463 // indirect
+	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
