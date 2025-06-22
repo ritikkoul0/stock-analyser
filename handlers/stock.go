@@ -73,5 +73,11 @@ func UpdateStockDetail(ctx *gin.Context) {
 		return
 	}
 
+	err = kafka.SendMessage(ctx, "stock-analyser", input.NewSymbol)
+	if err != nil {
+		ctx.JSON(500, gin.H{"error": "Kafka send failed after update"})
+		return
+	}
+
 	ctx.JSON(200, gin.H{"message": "Stock updated successfully"})
 }
