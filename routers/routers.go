@@ -32,7 +32,7 @@ func SetupRouter() *gin.Engine {
 		stock := v1.Group("/stock")
 		{
 			stock.GET("", handlers.GetStockDetail)
-			stock.DELETE("/:symbol", handlers.DeleteStockkDetail)
+			stock.DELETE("/:symbol", handlers.DeleteStockDetail)
 			stock.PUT("/:symbol", handlers.UpdateStockDetail)
 		}
 	}
