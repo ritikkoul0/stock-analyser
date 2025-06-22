@@ -60,3 +60,15 @@ func GetStock(ctx context.Context) ([]string, error) {
 
 	return stocks, nil
 }
+
+func DeleteStock(ctx context.Context, symbol string) error {
+	query := `DELETE FROM stocksymbol WHERE stock_symbol = $1;`
+	_, err := DB.ExecContext(ctx, query, symbol)
+	return err
+}
+
+func UpdateStock(ctx context.Context, oldSymbol string, newSymbol string) error {
+	query := `UPDATE stocksymbol SET stock_symbol = $1 WHERE stock_symbol = $2;`
+	_, err := DB.ExecContext(ctx, query, newSymbol, oldSymbol)
+	return err
+}
